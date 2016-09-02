@@ -88,8 +88,10 @@ def handle_movies(results):
         trailer = "%syoutubevideo&&id=%s" % (PLUGIN_BASE, utils.extract_youtube_id(item["trailer"]))
         movie = VideoItem(label=item["title"],
                           path=PLUGIN_BASE + path % item["ids"]["tmdb"])
+        if not item["runtime"] is None:
+            duration = item["runtime"] * 60
         movie.set_infos({'title': item["title"],
-                         'duration': item["runtime"] * 60,
+                         'duration': duration,
                          'tagline': item["tagline"],
                          'mediatype': "movie",
                          'trailer': trailer,
